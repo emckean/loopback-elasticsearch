@@ -1,0 +1,1 @@
+## Loopback-Elasticsearch example
