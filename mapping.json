@@ -1,0 +1,84 @@
+{
+    "properties": {
+      "category": {
+        "type": "multi_field",
+        "fields": {
+          "raw": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "text": {
+            "type": "string",
+            "analyzer": "dictionary_analyzer"
+          },
+          "asciiFolded": {
+            "type": "string",
+            "analyzer": "folding"
+          }
+        }
+      },
+      "air_date": {
+        "type": "string",
+        "fields": {
+          "raw": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "text": {
+            "type": "string",
+            "analyzer": "dictionary_analyzer"
+          },
+          "asciiFolded": {
+            "type": "string",
+            "analyzer": "folding"
+          }
+        }
+      },
+      "question": {
+        "type": "string",
+        "fields": {
+          "raw": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "text": {
+            "type": "string",
+            "analyzer": "dictionary_analyzer"
+          },
+          "asciiFolded": {
+            "type": "string",
+            "analyzer": "folding"
+          }
+        }
+      },
+      "value": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "answer": {
+        "type": "multi_field",
+        "fields": {
+          "raw": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "text": {
+            "type": "string",
+            "analyzer": "dictionary_analyzer"
+          },
+          "asciiFolded": {
+            "type": "string",
+            "analyzer": "folding"
+          }
+        }
+      },
+      "round": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "show_number": {
+        "type": "integer",
+        "index": "not_analyzed"
+      }
+    }
+  }
