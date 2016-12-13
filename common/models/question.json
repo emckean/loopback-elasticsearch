@@ -32,6 +32,9 @@
     },
     "show_number": {
       "type": "number"
+    },
+    "random": {
+      "type": "number"
     }
   },
   "validations": [],
