@@ -14,8 +14,12 @@ module.exports = function(Question) {
 				    multi_match: {
 				      query: term,
 				      fields: [ 
-				        'question',
-				        'question.text'
+				        'question.asciifolded',
+				        'question.text',
+				        'question.text_lc',
+				        'question.shingle',
+				        'question.shingle_lc',
+				        'question.stemmed'
 				      ],
 				      type: 'most_fields' 
 				    }
@@ -47,13 +51,22 @@ module.exports = function(Question) {
 		})
 
 	Question.findRandom = function(cb){
-		//replace w/'count'
-		// var random = randomInt(1, 10000)
-		var random = 2836
+		var random = randomInt(1, 300000)
 		Question.findOne({
-	                where: {
-	                	'random': random
-	                }            
+				  "native": {
+				    "query": {
+				      "function_score": {
+				        "functions": [
+				          {
+				            "random_score": {
+				              "seed": random
+				            }
+				          }
+				        ],
+				        "score_mode": "sum"
+				      }
+				    }
+				  }
             }, function (err, questions){
 				console.log('got here')
 				cb(null, questions);
@@ -73,24 +86,11 @@ module.exports = function(Question) {
 			}
 		})
 
-	Question.observe('before save', function addRandom(ctx, next) {
-
-
-	  if (ctx.instance) {
-	  	var random = randomInt(1,10000);
-	  	console.log(random)
-	    ctx.instance.random = random;
-	  } 
-	  // else {
-	  //   ctx.data.updated = new Date();
-	  // }
-	  next();
-	});
 
 	//let's disable the methods we don't want people to use
 	// Question.disableRemoteMethodByName('create');		// Removes (POST) /Questions
 	Question.disableRemoteMethodByName('exists');		// Removes (GET) /Questions/:id/exists
-	Question.disableRemoteMethodByName('find');		// Removes (GET) /Questions/:id/exists
+	// Question.disableRemoteMethodByName('find');		// Removes (GET) /Questions/:id/exists
 	Question.disableRemoteMethod('findById', true);		// Removes (GET) /Questions/:id
 	Question.disableRemoteMethod('upsert', true);		// Removes (PUT) /Questions
 	Question.disableRemoteMethod('deleteById', true);	// Removes (DELETE) /Questions/:id

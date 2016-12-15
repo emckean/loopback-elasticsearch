@@ -48,7 +48,25 @@
           "asciiFolded": {
             "type": "string",
             "analyzer": "folding"
+          },
+          "text_lc": {
+            "type": "string",
+            "analyzer": "dictionary_analyzer_lc"
+          },
+          "shingle": {
+            "type": "string",
+            "analyzer": "shingle_analyzer"
+          },
+          "shingle_lc": {
+            "type": "string",
+            "analyzer": "shingle_analyzer_lc"
+          },
+          "stemmed": {
+            "type": "string",
+            "analyzer": "stemmer_analyzer"
           }
+
+
         }
       },
       "value": {
